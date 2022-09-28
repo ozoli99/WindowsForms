@@ -88,6 +88,26 @@ namespace ExamGenerator
             Close();
         }
 
+        /// <summary>
+        /// Tetel szamanak esemenykezeloje.
+        /// </summary>
+        private void NumericQuestionCount_ValueChanged(object? sender, EventArgs e)
+        {
+            if (_numericPeriodLength.Value > _numericQuestionCount.Value - 1)
+                _numericPeriodLength.Value = _numericQuestionCount.Value - 1;
+            _numericPeriodLength.Maximum = _numericQuestionCount.Value - 1;
+
+            for (int i = _checkedListBox.Items.Count - 1; i >= _numericQuestionCount.Value; i--)
+            {
+                _checkedListBox.Items.Remove(_checkedListBox.Items[i]);
+            }
+
+            for (int i = _checkedListBox.Items.Count + 1; i <= _numericQuestionCount.Value; i++)
+            {
+                _checkedListBox.Items.Add(i, !_historyList.Contains(i));
+            }
+        }
+
         #endregion
     }
 }
