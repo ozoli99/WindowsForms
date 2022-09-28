@@ -34,9 +34,20 @@
 
         #endregion
 
+        #region Public methods
+
         public void Load()
         {
-            throw new NotImplementedException();
+            FileContent = File.ReadAllText(_filePath);
+            NonWhiteSpaceCharacterCount = FileContent.Count(c => !char.IsWhiteSpace(c));
+
+            ComputeDistinctWords();
+            SentenceCount = ComputeSentenceCount();
+            ProperNounCount = ComputeProperNounCount();
+            ColemanLieuIndex = ComputeColemanLieuIndex();
+            FleschReadingEase = ComputeFleschReadingEase();
         }
+
+        #endregion
     }
 }
