@@ -35,5 +35,20 @@ namespace ExamGenerator
         }
 
         #endregion
+
+        #region Event handlers
+
+        /// <summary>
+        /// Idozito esemenykezeloje.
+        /// </summary>
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            int number = _questionGenerator.Next(1, _questionCount + 1);
+            while (_historyList.Contains(number))
+                number = _questionGenerator.Next(1, _questionCount + 1);
+            _textNumber.Text = number.ToString();
+        }
+
+        #endregion
     }
 }
