@@ -59,5 +59,26 @@ namespace ExamGenerator
         }
 
         #endregion
+
+        #region Event handlers
+
+        /// <summary>
+        /// Ok gomb esemenykezeloje.
+        /// </summary>
+        private void ButtonOk_Click(object? sender, EventArgs e)
+        {
+            for (int i = _historyList.Count - 1; i >= 0; i--)
+            {
+                if (_historyList[i] >= _numericQuestionCount.Value || _checkedListBox.CheckedItems.Contains(_historyList[i]))
+                    _historyList.RemoveAt(i);
+            }
+            while (_historyList.Count > _numericPeriodLength.Value)
+                _historyList.RemoveAt(_historyList.Count - 1);
+
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        #endregion
     }
 }
