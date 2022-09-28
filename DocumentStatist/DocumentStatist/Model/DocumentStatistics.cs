@@ -23,6 +23,17 @@
 
         #endregion
 
+        #region Constructor
+
+        public DocumentStatistics(string filePath)
+        {
+            _filePath = filePath;
+            FileContent = string.Empty;
+            DistinctWordCount = new Dictionary<string, int>();
+        }
+
+        #endregion
+
         public void Load()
         {
             throw new NotImplementedException();
