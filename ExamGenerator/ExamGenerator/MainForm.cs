@@ -71,6 +71,20 @@ namespace ExamGenerator
             }
         }
 
+        /// <summary>
+        /// Beallitasok gomb esemenykezeloje.
+        /// </summary>
+        private void ButtonSet_Click(object? sender, EventArgs e)
+        {
+            SettingsForm settingsForm = new SettingsForm(_questionCount, _periodLength, _historyList);
+
+            if (settingsForm.ShowDialog() == DialogResult.OK)
+            {
+                _questionCount = settingsForm.QuestionCount;
+                _periodLength = settingsForm.PeriodLength;
+            }
+        }
+
         #endregion
     }
 }
