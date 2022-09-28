@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentStatistView", "DocumentStatistView\DocumentStatistView.csproj", "{F3E60DD6-2C75-4F57-99BB-12F5781956CA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentStatist", "..\DocumentStatist\DocumentStatist\DocumentStatist.csproj", "{B2DAC365-B20B-4F3F-BAAE-43991DE9925F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F3E60DD6-2C75-4F57-99BB-12F5781956CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3E60DD6-2C75-4F57-99BB-12F5781956CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3E60DD6-2C75-4F57-99BB-12F5781956CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2DAC365-B20B-4F3F-BAAE-43991DE9925F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2DAC365-B20B-4F3F-BAAE-43991DE9925F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2DAC365-B20B-4F3F-BAAE-43991DE9925F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2DAC365-B20B-4F3F-BAAE-43991DE9925F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0-windows7.0": {}
+    "net6.0-windows7.0": {
+      "DocumentStatist/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/DocumentStatist.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DocumentStatist.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "DocumentStatist/1.0.0": {
+      "type": "project",
+      "path": "../../DocumentStatist/DocumentStatist/DocumentStatist.csproj",
+      "msbuildProject": "../../DocumentStatist/DocumentStatist/DocumentStatist.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0-windows7.0": []
+    "net6.0-windows7.0": [
+      "DocumentStatist >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Zoli\\.nuget\\packages\\": {},
@@ -40,7 +59,11 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "E:\\ELTE\\V. Felev\\Esemenyvezerelt alkalmazasok\\Gyakorlas\\WindowsForms\\DocumentStatist\\DocumentStatist\\DocumentStatist.csproj": {
+              "projectPath": "E:\\ELTE\\V. Felev\\Esemenyvezerelt alkalmazasok\\Gyakorlas\\WindowsForms\\DocumentStatist\\DocumentStatist\\DocumentStatist.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
