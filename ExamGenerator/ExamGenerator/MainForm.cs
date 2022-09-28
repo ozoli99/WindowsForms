@@ -15,9 +15,25 @@ namespace ExamGenerator
 
         #endregion
 
+        #region Constructor
+
+        /// <summary>
+        /// Foablak peldanyositasa.
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
+
+            _historyList = new List<int>();
+            _questionGenerator = new Random();
+            _questionCount = 10;
+            _periodLength = 0;
+
+            _timer = new System.Windows.Forms.Timer();
+            _timer.Interval = 20;
+            _timer.Tick += new EventHandler(Timer_Tick);
         }
+
+        #endregion
     }
 }
