@@ -36,6 +36,9 @@
 
         #region Public methods
 
+        /// <summary>
+        /// Loads and processes the file.
+        /// </summary>
         public void Load()
         {
             FileContent = File.ReadAllText(_filePath);
@@ -46,6 +49,166 @@
             ProperNounCount = ComputeProperNounCount();
             ColemanLieuIndex = ComputeColemanLieuIndex();
             FleschReadingEase = ComputeFleschReadingEase();
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void ComputeDistinctWords()
+        {
+            DistinctWordCount.Clear();
+            string[] words = FileContent
+                .Split()
+                .Where(s => s.Length > 0)
+                .ToArray();
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                words[i] = string.Concat(
+                    words[i]
+                        .SkipWhile(c => !char.IsLetter(c))
+                        .Reverse()
+                        .SkipWhile(c => !char.IsLetter(c))
+                        .Reverse()
+                );
+
+                if (string.IsNullOrEmpty(words[i]))
+                {
+                    continue;
+                }
+
+                words[i] = words[i].ToLower();
+
+                if (DistinctWordCount.ContainsKey(words[i]))
+                {
+                    ++DistinctWordCount[words[i]];
+                }
+                else
+                {
+                    DistinctWordCount.Add(words[i], 1);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Counts the number of sentences.
+        /// </summary>
+        /// <remarks>
+        /// Counts the number of sentences based on the punctuation marks.
+        /// </remarks>
+        private int ComputeSentenceCount()
+        {
+            int sentenceCount = 0;
+            var marks = new char[] {'.', '!', '?'};
+
+            for (int i = 1; i < FileContent.Length; i++)
+            {
+                if (marks.Contains(FileContent[i]) && !marks.Contains(FileContent[i - 1]))
+                {
+                    sentenceCount++;
+                }
+            }
+
+            return sentenceCount;
+        }
+
+        /// <summary>
+        /// Counts the proper nouns.
+        /// </summary>
+        /// <remarks>
+        /// Counts the proper nouns by summarizing the count of capital letters, which are not placed after a punctuation mark.
+        /// </remarks>
+        private int ComputeProperNounCount()
+        {
+            string whitespacelessContent = string.Concat(FileContent.Where(c => !char.IsWhiteSpace(c)));
+            char[] marks = {'.', '!', '?'};
+
+            int pNounCount = 0;
+            for (int i = 1; i < whitespacelessContent.Length; i++)
+            {
+                if (char.IsUpper(whitespacelessContent[i]) && !marks.Contains(whitespacelessContent[i - 1]))
+                {
+                    pNounCount++;
+                }
+            }
+
+            return pNounCount;
+        }
+
+        /// <summary>
+        /// Calculates the Coleman-Lieu readability index of the file content.
+        /// </summary>
+        /// <remarks>
+        /// The formula: (0.0588 * L) - (0.296 * S) - 15.8
+        /// L = average number of characters per 100 words
+        /// S = average number of sentences per 100 words
+        /// </remarks>
+        /// <see cref="https://readable.com/readability/coleman-liau-readability-index/"/>
+        private double ComputeColemanLieuIndex()
+        {
+            double ratio = (double)DistinctWordCount.Sum(w => w.Value) / 100;
+            
+            double L = NonWhiteSpaceCharacterCount / ratio;
+            double S = SentenceCount / ratio;
+
+            return 0.0588 * L - 0.296 * S - 15.8;
+        }
+
+        /// <summary>
+        /// Calculates Flesch Reading Ease score of the file content.
+        /// </summary>
+        /// <remarks>
+        /// The formula:
+        /// 206.835 - 1.015 * (total words / total sentences) - 84.6 * (total syllable / total words)
+        /// </remarks>
+        /// <see cref="https://readable.com/readability/flesch-reading-ease-flesch-kincaid-grade-level/"/>
+        private double ComputeFleschReadingEase()
+        {
+            int totalwordCount = DistinctWordCount.Sum(w => w.Value);
+
+            int totalSyllables = 0;
+            foreach (var item in DistinctWordCount)
+            {
+                totalSyllables += CountSyllables(item.Key) * item.Value;
+            }
+
+            return 206.835 - 1.015 * ((double)totalwordCount / SentenceCount) - 84.6 * ((double)totalSyllables / totalwordCount);
+        }
+
+        /// <summary>
+        /// Counts the syllables of a given word. Assumes that the word is cleared by non-letter characters.
+        /// </summary>
+        /// <remarks>
+        /// Based on counting the vowels in the word.
+        /// </remarks>
+        private int CountSyllables(string word)
+        {
+            bool lastWasVowel = false;
+            var vowels = new[] { 'a', 'e', 'i', 'o', 'u', 'y' };
+            int count = 0;
+
+            // a string is an IEnumerable<char>; convenient.
+            foreach (var c in word)
+            {
+                if (vowels.Contains(c))
+                {
+                    if (!lastWasVowel)
+                        count++;
+                    lastWasVowel = true;
+                }
+                else
+                {
+                    lastWasVowel = false;
+                }
+            }
+
+            if ((word.EndsWith("es") || word.EndsWith("ed")) && !word.EndsWith("le"))
+            {
+                count--;
+            }
+
+            return count;
         }
 
         #endregion
