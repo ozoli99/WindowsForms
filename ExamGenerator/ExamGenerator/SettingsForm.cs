@@ -78,6 +78,15 @@ namespace ExamGenerator
             DialogResult = DialogResult.OK;
             Close();
         }
+        
+        /// <summary>
+        /// Megsem gomb esemenykezeloje.
+        /// </summary>
+        private void ButtonCancel_Click(object? sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
 
         #endregion
     }
