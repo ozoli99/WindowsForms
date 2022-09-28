@@ -56,6 +56,11 @@ namespace DocumentStatistView
             }
         }
 
+        private void CountWords(object? sender, EventArgs e)
+        {
+
+        }
+
         #endregion
     }
 }
