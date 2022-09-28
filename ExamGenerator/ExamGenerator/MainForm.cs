@@ -49,6 +49,28 @@ namespace ExamGenerator
             _textNumber.Text = number.ToString();
         }
 
+        /// <summary>
+        /// Start gomb esemenykezeloje.
+        /// </summary>
+        private void ButtonStart_Click(object? sender, EventArgs e)
+        {
+            if (!_timer.Enabled)
+            {
+                _timer.Start();
+                _buttonStart.Text = "STOP";
+            }
+            else
+            {
+                _historyList.Insert(0, int.Parse(_textNumber.Text));
+
+                if (_historyList.Count > _periodLength)
+                    _historyList.RemoveAt(_historyList.Count - 1);
+
+                _timer.Stop();
+                _buttonStart.Text = "START";
+            }
+        }
+
         #endregion
     }
 }
