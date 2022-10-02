@@ -30,5 +30,16 @@
         public String CalculationString { get { return _calculationString; } }
 
         #endregion
+
+        #region Constructor
+
+        public CalculatorModel()
+        {
+            _result = 0;
+            _calculationString = string.Empty;
+            _operation = Operation.None;
+        }
+
+        #endregion
     }
 }
