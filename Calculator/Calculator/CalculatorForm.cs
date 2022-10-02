@@ -1,19 +1,13 @@
 namespace Calculator
 {
     /// <summary>
-    /// Muveletek felsorolasi tipusa.
-    /// </summary>
-    public enum Operation { None, Add, Substract, Multiply, Divide }
-
-    /// <summary>
     /// Szamologep ablak tipusa.
     /// </summary>
     public partial class CalculatorForm : Form
     {
         #region Private fields
 
-        private Double _result;
-        private Operation _operation;
+        private CalculatorModel _model;
 
         #endregion
 
@@ -26,10 +20,16 @@ namespace Calculator
         {
             InitializeComponent();
 
-            _operation = Operation.None;
-            _result = 0;
-            _textNumber.Text = "0";
+            _model = new CalculatorModel();
+            _textNumber.Text = _model.Result.ToString();
+
+            KeyPreview = true;
+            KeyDown += new KeyEventHandler(CalculatorForm_KeyDown);
         }
+
+        #endregion
+
+        #region Event handlers
 
         /// <summary>
         /// Gomb esemenykezeloje.
@@ -96,6 +96,11 @@ namespace Calculator
                 _textNumber.Focus();
                 _textNumber.SelectAll();
             }
+        }
+
+        private void CalculatorForm_KeyDown(object? sender, KeyEventArgs e)
+        {
+
         }
 
         #endregion
