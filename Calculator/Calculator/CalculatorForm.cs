@@ -91,6 +91,44 @@ namespace Calculator
 
         #endregion
 
+        #region Private methods
 
+        /// <summary>
+        /// Számítás végrehajtása
+        /// </summary>
+        /// <param name="operation"></param>
+        private void PerformCalculation(Operation operation)
+        {
+            try
+            {
+                _model.Calculate(double.Parse(_textNumber.Text), operation);
+
+                _textNumber.Text = _model.Result.ToString();
+
+                if (_model.CalculationString != string.Empty)
+                {
+                    _listHistory.Items.Add(_model.CalculationString);
+                }
+            }
+            catch (OverflowException)
+            {
+                MessageBox.Show("Your input has to many digits!", "Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Your input is not a real number!\nPlease correct!", "Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("No number in input!\nPlease correct!", "Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                _textNumber.Focus();
+                _textNumber.SelectAll();
+            }
+        }
+
+        #endregion
     }
 }
