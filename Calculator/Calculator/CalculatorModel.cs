@@ -33,11 +33,55 @@
 
         #region Constructor
 
+        /// <summary>
+        /// Számológép példányosítása.
+        /// </summary>
         public CalculatorModel()
         {
             _result = 0;
             _calculationString = string.Empty;
             _operation = Operation.None;
+        }
+
+        #endregion
+
+        #region Public methods
+
+        /// <summary>
+        /// Művelet végrehajtása.
+        /// </summary>
+        /// <param name="value">A második érték.</param>
+        /// <param name="operation">Az új művelet.</param>
+        public void Calculate(Double value, Operation operation)
+        {
+            if (_operation != Operation.None)
+            {
+                switch (_operation)
+                {
+                    case Operation.Add:
+                        _calculationString = _result + " + " + value + " = " + (_result + value);
+                        _result = _result + value;
+                        break;
+                    case Operation.Subtract:
+                        _calculationString = _result + " - " + value + " = " + (_result - value);
+                        _result = _result - value;
+                        break;
+                    case Operation.Multiply:
+                        _calculationString = _result + " * " + value + " = " + (_result * value);
+                        _result = _result * value;
+                        break;
+                    case Operation.Divide:
+                        _calculationString = _result + " / " + value + " = " + (_result / value);
+                        _result = _result / value;
+                        break;
+                }
+            }
+            else
+            {
+                _result = value;
+            }
+
+            _operation = operation;
         }
 
         #endregion
