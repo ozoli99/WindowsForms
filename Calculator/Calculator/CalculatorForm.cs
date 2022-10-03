@@ -1,19 +1,13 @@
 namespace Calculator
 {
     /// <summary>
-    /// Muveletek felsorolasi tipusa.
-    /// </summary>
-    public enum Operation { None, Add, Substract, Multiply, Divide }
-
-    /// <summary>
     /// Szamologep ablak tipusa.
     /// </summary>
     public partial class CalculatorForm : Form
     {
         #region Private fields
 
-        private Double _result;
-        private Operation _operation;
+        private CalculatorModel _model;
 
         #endregion
 
@@ -26,62 +20,99 @@ namespace Calculator
         {
             InitializeComponent();
 
-            _operation = Operation.None;
-            _result = 0;
-            _textNumber.Text = "0";
+            _model = new CalculatorModel();
+            _textNumber.Text = _model.Result.ToString();
+
+            KeyPreview = true;
+            KeyDown += new KeyEventHandler(CalculatorForm_KeyDown);
+        }
+
+        #endregion
+
+        #region Event handlers
+
+        /// <summary>
+        /// Gomb eseménykezelõje.
+        /// </summary>
+        private void Button_Click(object? sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                switch (button.Text)
+                {
+                    case "+":
+                        PerformCalculation(Operation.Add);
+                        break;
+                    case "-":
+                        PerformCalculation(Operation.Subtract);
+                        break;
+                    case "*":
+                        PerformCalculation(Operation.Multiply);
+                        break;
+                    case "/":
+                        PerformCalculation(Operation.Divide);
+                        break;
+                    default:
+                        PerformCalculation(Operation.None);
+                        break;
+                }
+            }
         }
 
         /// <summary>
-        /// Gomb esemenykezeloje.
+        /// Billentyû eseménykezelõje.
         /// </summary>
-        private void Button_Click(object sender, EventArgs e)
+        private void CalculatorForm_KeyDown(object? sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Add:
+                    PerformCalculation(Operation.Add);
+                    e.SuppressKeyPress = true;
+                    break;
+                case Keys.Subtract:
+                    PerformCalculation(Operation.Subtract);
+                    e.SuppressKeyPress = true;
+                    break;
+                case Keys.Multiply:
+                    PerformCalculation(Operation.Multiply);
+                    e.SuppressKeyPress = true;
+                    break;
+                case Keys.Divide:
+                    PerformCalculation(Operation.Divide);
+                    e.SuppressKeyPress = true;
+                    break;
+                case Keys.Enter:
+                    PerformCalculation(Operation.None);
+                    e.SuppressKeyPress = true;
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region Private methods
+
+        /// <summary>
+        /// Számítás végrehajtása
+        /// </summary>
+        /// <param name="operation"></param>
+        private void PerformCalculation(Operation operation)
         {
             try
             {
-                if (_operation != Operation.None)
-                {
-                    Double value = Double.Parse(_textNumber.Text);
-                    switch (_operation)
-                    {
-                        case Operation.Add:
-                            _listHistory.Items.Add(_result + "+" + value + "=" + (_result + value));
-                            _result = _result + value;
-                            break;
-                        case Operation.Substract:
-                            _listHistory.Items.Add(_result + "-" + value + "=" + (_result - value));
-                            _result = _result - value;
-                            break;
-                        case Operation.Multiply:
-                            _listHistory.Items.Add(_result + "*" + value + "=" + (_result * value));
-                            _result = _result * value;
-                            break;
-                        case Operation.Divide:
-                            _listHistory.Items.Add(_result + "/" + value + "=" + (_result / value));
-                            _result = _result / value;
-                            break;
-                    }
-                    _textNumber.Text = _result.ToString();
-                }
-                else
-                {
-                    _result = Double.Parse(_textNumber.Text);
-                }
+                _model.Calculate(double.Parse(_textNumber.Text), operation);
 
-                if (sender is Button button)
+                _textNumber.Text = _model.Result.ToString();
+
+                if (_model.CalculationString != string.Empty)
                 {
-                    switch (button.Text)
-                    {
-                        case "+": _operation = Operation.Add; break;
-                        case "-": _operation = Operation.Substract; break;
-                        case "*": _operation = Operation.Multiply; break;
-                        case "/": _operation = Operation.Divide; break;
-                        case "=": _operation = Operation.None; break;
-                    }
+                    _listHistory.Items.Add(_model.CalculationString);
                 }
             }
             catch (OverflowException)
             {
-                MessageBox.Show("Your input has too many digits!", "Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Your input has to many digits!", "Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (FormatException)
             {
