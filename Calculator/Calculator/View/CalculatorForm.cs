@@ -23,6 +23,7 @@ namespace Calculator.View
             InitializeComponent();
 
             _model = new CalculatorModel();
+            _model.CalculationPerformed += new EventHandler<CalculatorEventArgs>(Model_CalculationPerformed);
             _textNumber.Text = _model.Result.ToString();
 
             KeyPreview = true;
@@ -31,7 +32,21 @@ namespace Calculator.View
 
         #endregion
 
-        #region Event handlers
+        #region Model event handlers
+
+        private void Model_CalculationPerformed(object? sender, CalculatorEventArgs e)
+        {
+            _textNumber.Text = e.Result.ToString();
+
+            if (e.CalculationString != String.Empty)
+            {
+                _listHistory.Items.Add(e.CalculationString);
+            }
+        }
+
+        #endregion
+
+        #region Form event handlers
 
         /// <summary>
         /// Gomb eseménykezelõje.
@@ -104,13 +119,6 @@ namespace Calculator.View
             try
             {
                 _model.Calculate(double.Parse(_textNumber.Text), operation);
-
-                _textNumber.Text = _model.Result.ToString();
-
-                if (_model.CalculationString != string.Empty)
-                {
-                    _listHistory.Items.Add(_model.CalculationString);
-                }
             }
             catch (OverflowException)
             {
