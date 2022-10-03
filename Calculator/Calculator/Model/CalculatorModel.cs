@@ -40,7 +40,6 @@
         public CalculatorModel()
         {
             _result = 0;
-            _calculationString = string.Empty;
             _operation = Operation.None;
         }
 
@@ -55,24 +54,26 @@
         /// <param name="operation">Az új művelet.</param>
         public void Calculate(Double value, Operation operation)
         {
+            string calculationString = string.Empty;
+
             if (_operation != Operation.None)
             {
                 switch (_operation)
                 {
                     case Operation.Add:
-                        _calculationString = _result + " + " + value + " = " + (_result + value);
+                        calculationString = _result + " + " + value + " = " + (_result + value);
                         _result = _result + value;
                         break;
                     case Operation.Subtract:
-                        _calculationString = _result + " - " + value + " = " + (_result - value);
+                        calculationString = _result + " - " + value + " = " + (_result - value);
                         _result = _result - value;
                         break;
                     case Operation.Multiply:
-                        _calculationString = _result + " * " + value + " = " + (_result * value);
+                        calculationString = _result + " * " + value + " = " + (_result * value);
                         _result = _result * value;
                         break;
                     case Operation.Divide:
-                        _calculationString = _result + " / " + value + " = " + (_result / value);
+                        calculationString = _result + " / " + value + " = " + (_result / value);
                         _result = _result / value;
                         break;
                 }
@@ -83,6 +84,8 @@
             }
 
             _operation = operation;
+
+            CalculationPerformed?.Invoke(this, new CalculatorEventArgs(_result, calculationString));
         }
 
         #endregion
