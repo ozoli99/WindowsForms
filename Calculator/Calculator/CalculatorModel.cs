@@ -13,7 +13,6 @@
         #region Private fields
 
         private double _result;
-        private string _calculationString;
         private Operation _operation;
 
         #endregion
@@ -24,10 +23,12 @@
         /// Aktuális eredmény lekérdezése.
         /// </summary>
         public Double Result { get { return _result; } }
-        /// <summary>
-        /// Aktuális számítás szöveges lekérdezése.
-        /// </summary>
-        public String CalculationString { get { return _calculationString; } }
+
+        #endregion
+
+        #region Events
+
+        public event EventHandler<CalculatorEventArgs>? CalculationPerformed;
 
         #endregion
 
