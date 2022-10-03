@@ -1,4 +1,6 @@
-namespace Calculator
+using Calculator.Model;
+
+namespace Calculator.View
 {
     /// <summary>
     /// Szamologep ablak tipusa.

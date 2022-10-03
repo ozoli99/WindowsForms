@@ -1,4 +1,4 @@
-﻿namespace Calculator
+﻿namespace Calculator.Model
 {
     /// <summary>
     /// Művelet felsorolási típusa.
