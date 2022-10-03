@@ -15,3 +15,4 @@ E:\ELTE\V. Felev\Esemenyvezerelt alkalmazasok\Gyakorlas\WindowsForms\Calculator\
 E:\ELTE\V. Felev\Esemenyvezerelt alkalmazasok\Gyakorlas\WindowsForms\Calculator\Calculator\obj\Debug\net6.0-windows\Calculator.pdb
 E:\ELTE\V. Felev\Esemenyvezerelt alkalmazasok\Gyakorlas\WindowsForms\Calculator\Calculator\obj\Debug\net6.0-windows\Calculator.genruntimeconfig.cache
 E:\ELTE\V. Felev\Esemenyvezerelt alkalmazasok\Gyakorlas\WindowsForms\Calculator\Calculator\obj\Debug\net6.0-windows\ref\Calculator.dll
+E:\ELTE\V. Felev\Esemenyvezerelt alkalmazasok\Gyakorlas\WindowsForms\Calculator\Calculator\obj\Debug\net6.0-windows\Calculator.View.CalculatorForm.resources
