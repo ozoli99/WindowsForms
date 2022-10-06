@@ -13,3 +13,18 @@ E:\ELTE\V. Felev\Esemenyvezerelt alkalmazasok\Gyakorlas\WindowsForms\DocumentSta
 E:\ELTE\V. Felev\Esemenyvezerelt alkalmazasok\Gyakorlas\WindowsForms\DocumentStatist\DocumentStatist\obj\Debug\net6.0\DocumentStatist.pdb
 E:\ELTE\V. Felev\Esemenyvezerelt alkalmazasok\Gyakorlas\WindowsForms\DocumentStatist\DocumentStatist\obj\Debug\net6.0\DocumentStatist.genruntimeconfig.cache
 E:\ELTE\V. Felev\Esemenyvezerelt alkalmazasok\Gyakorlas\WindowsForms\DocumentStatist\DocumentStatist\obj\Debug\net6.0\ref\DocumentStatist.dll
+C:\Users\ditp5v\Egyetem\EVA\Gyakorlatok\IV. Gyakorlat\WindowsForms\DocumentStatist\DocumentStatist\bin\Debug\net6.0\DocumentStatist.exe
+C:\Users\ditp5v\Egyetem\EVA\Gyakorlatok\IV. Gyakorlat\WindowsForms\DocumentStatist\DocumentStatist\bin\Debug\net6.0\DocumentStatist.deps.json
+C:\Users\ditp5v\Egyetem\EVA\Gyakorlatok\IV. Gyakorlat\WindowsForms\DocumentStatist\DocumentStatist\bin\Debug\net6.0\DocumentStatist.runtimeconfig.json
+C:\Users\ditp5v\Egyetem\EVA\Gyakorlatok\IV. Gyakorlat\WindowsForms\DocumentStatist\DocumentStatist\bin\Debug\net6.0\DocumentStatist.dll
+C:\Users\ditp5v\Egyetem\EVA\Gyakorlatok\IV. Gyakorlat\WindowsForms\DocumentStatist\DocumentStatist\bin\Debug\net6.0\DocumentStatist.pdb
+C:\Users\ditp5v\Egyetem\EVA\Gyakorlatok\IV. Gyakorlat\WindowsForms\DocumentStatist\DocumentStatist\obj\Debug\net6.0\DocumentStatist.csproj.AssemblyReference.cache
+C:\Users\ditp5v\Egyetem\EVA\Gyakorlatok\IV. Gyakorlat\WindowsForms\DocumentStatist\DocumentStatist\obj\Debug\net6.0\DocumentStatist.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ditp5v\Egyetem\EVA\Gyakorlatok\IV. Gyakorlat\WindowsForms\DocumentStatist\DocumentStatist\obj\Debug\net6.0\DocumentStatist.AssemblyInfoInputs.cache
+C:\Users\ditp5v\Egyetem\EVA\Gyakorlatok\IV. Gyakorlat\WindowsForms\DocumentStatist\DocumentStatist\obj\Debug\net6.0\DocumentStatist.AssemblyInfo.cs
+C:\Users\ditp5v\Egyetem\EVA\Gyakorlatok\IV. Gyakorlat\WindowsForms\DocumentStatist\DocumentStatist\obj\Debug\net6.0\DocumentStatist.csproj.CoreCompileInputs.cache
+C:\Users\ditp5v\Egyetem\EVA\Gyakorlatok\IV. Gyakorlat\WindowsForms\DocumentStatist\DocumentStatist\obj\Debug\net6.0\DocumentStatist.dll
+C:\Users\ditp5v\Egyetem\EVA\Gyakorlatok\IV. Gyakorlat\WindowsForms\DocumentStatist\DocumentStatist\obj\Debug\net6.0\refint\DocumentStatist.dll
+C:\Users\ditp5v\Egyetem\EVA\Gyakorlatok\IV. Gyakorlat\WindowsForms\DocumentStatist\DocumentStatist\obj\Debug\net6.0\DocumentStatist.pdb
+C:\Users\ditp5v\Egyetem\EVA\Gyakorlatok\IV. Gyakorlat\WindowsForms\DocumentStatist\DocumentStatist\obj\Debug\net6.0\DocumentStatist.genruntimeconfig.cache
+C:\Users\ditp5v\Egyetem\EVA\Gyakorlatok\IV. Gyakorlat\WindowsForms\DocumentStatist\DocumentStatist\obj\Debug\net6.0\ref\DocumentStatist.dll
