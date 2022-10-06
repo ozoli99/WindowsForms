@@ -17,6 +17,7 @@ namespace DocumentStatistView
             InitializeComponent();
 
             openFileDialogMenuItem.Click += OpenDialog;
+            countWordsMenuItem.Click += CountWords;
         }
 
         #endregion
@@ -57,6 +58,34 @@ namespace DocumentStatistView
         }
 
         private void CountWords(object? sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(_documentStatistics.FileContent))
+            {
+                MessageBox.Show("There's no file content read.", "DocumentStatist", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int minLength = Convert.ToInt32(spinBoxMinLength.Value);
+            int minOccurence = Convert.ToInt32(spinBoxMinOccurence.Value);
+            string ignoredWordsText = textBoxIgnoredWords.Text;
+            string[] ignoredWords = ignoredWordsText.Split(", ");
+
+            _documentStatistics.Load();
+
+            listBoxCounter.Items.Clear();
+            listBoxCounter.BeginUpdate();
+            foreach (var pair in _documentStatistics.DistinctWordCount)
+            {
+                listBoxCounter.Items.Add(pair.Key + ": " + pair.Value);
+            }
+            listBoxCounter.EndUpdate();
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void UpdateLabels()
         {
 
         }
