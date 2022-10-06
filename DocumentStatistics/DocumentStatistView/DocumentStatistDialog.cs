@@ -79,6 +79,8 @@ namespace DocumentStatistView
                 listBoxCounter.Items.Add(pair.Key + ": " + pair.Value);
             }
             listBoxCounter.EndUpdate();
+
+            UpdateLabels();
         }
 
         #endregion
@@ -87,7 +89,12 @@ namespace DocumentStatistView
 
         private void UpdateLabels()
         {
-
+            labelCharacters.Text = "Character count: " + _documentStatistics.CharacterCount.ToString();
+            labelNonWhitespaceCharacters.Text = "Non-whitespace characters: " + _documentStatistics.NonWhiteSpaceCharacterCount.ToString();
+            labelSentences.Text = "Sentence count: " + _documentStatistics.SentenceCount.ToString();
+            labelProperNouns.Text = "Proper noun count: " + _documentStatistics.ProperNounCount.ToString();
+            labelColemanLieuIndex.Text = "Coleman Lieu Index: " + _documentStatistics.ColemanLieuIndex.ToString();
+            labelFleschReadingEase.Text = "Flesch Reading Ease: " + _documentStatistics.ToString();
         }
 
         #endregion

@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "DocumentStatistView/1.0.0": {
+        "dependencies": {
+          "DocumentStatist": "1.0.0"
+        },
+        "runtime": {
+          "DocumentStatistView.dll": {}
+        }
+      },
+      "DocumentStatist/1.0.0": {
+        "runtime": {
+          "DocumentStatist.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DocumentStatistView/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DocumentStatist/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
