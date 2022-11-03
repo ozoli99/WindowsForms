@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ditp5v\\Egyetem\\EVA\\Gyakorlatok\\IV. Gyakorlat\\WindowsForms\\DocumentStatist\\DocumentStatist\\DocumentStatist.csproj",
+      "projectUniqueName": "C:\\Users\\ditp5v\\Downloads\\EVA\\Gyakorlatok\\WindowsForms\\DocumentStatist\\DocumentStatist\\DocumentStatist.csproj",
       "projectName": "DocumentStatist",
-      "projectPath": "C:\\Users\\ditp5v\\Egyetem\\EVA\\Gyakorlatok\\IV. Gyakorlat\\WindowsForms\\DocumentStatist\\DocumentStatist\\DocumentStatist.csproj",
+      "projectPath": "C:\\Users\\ditp5v\\Downloads\\EVA\\Gyakorlatok\\WindowsForms\\DocumentStatist\\DocumentStatist\\DocumentStatist.csproj",
       "packagesPath": "C:\\Users\\ditp5v\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ditp5v\\Egyetem\\EVA\\Gyakorlatok\\IV. Gyakorlat\\WindowsForms\\DocumentStatist\\DocumentStatist\\obj\\",
+      "outputPath": "C:\\Users\\ditp5v\\Downloads\\EVA\\Gyakorlatok\\WindowsForms\\DocumentStatist\\DocumentStatist\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

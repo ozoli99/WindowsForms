@@ -2,6 +2,7 @@
 {
     public interface IDocumentStatistics
     {
+        string FileContent { get;  }
         IDictionary<string, int> DistinctWordCount { get; }
         int CharacterCount { get; }
         int NonWhiteSpaceCharacterCount { get; }
