@@ -29,9 +29,12 @@ namespace DocumentStatistView
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
+                openFileDialog.Multiselect = true;
                 openFileDialog.InitialDirectory = "C:\\";
                 openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
                 openFileDialog.RestoreDirectory = true;
+
+                tabControl.TabPages.Clear();
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -109,6 +112,30 @@ namespace DocumentStatistView
             labelProperNouns.Text = labelProperNouns.Text.Split(':')[0] + ": " + _documentStatistics.ProperNounCount;
             labelColemanLieuIndex.Text = labelColemanLieuIndex.Text.Split(':')[0] + ": " + Math.Round(_documentStatistics.ColemanLieuIndex, 2);
             labelFleschReadingEase.Text = labelFleschReadingEase.Text.Split(':')[0] + ": " + Math.Round(_documentStatistics.FleschReadingEase, 2);
+        }
+
+        private void AddTabPage(string fileName)
+        {
+            IFileManager? fileManager = FileManagerFactory.CreateForPath(fileName);
+            if (fileManager == null)
+            {
+                // ...
+                return;
+            }
+
+            try
+            {
+                DocumentStatistControl control = new DocumentStatistControl();
+                control.LoadFile(fileManager);
+                TabPage tabPage = new TabPage(System.IO.Path.GetFileName(fileName));
+                tabPage.Controls.Add(control);
+                tabControl.TabPages.Add(tabPage);
+            }
+            catch (FileManagerException ex)
+            {
+                // ...
+                return;
+            }
         }
 
         #endregion
