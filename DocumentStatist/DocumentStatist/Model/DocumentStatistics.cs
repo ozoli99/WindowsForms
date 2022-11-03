@@ -4,7 +4,7 @@
     {
         #region Private fields
 
-        private readonly string _filePath;
+        private readonly IFileManager _fileManager;
 
         #endregion
 
@@ -25,9 +25,9 @@
 
         #region Constructor
 
-        public DocumentStatistics(string filePath)
+        public DocumentStatistics(IFileManager fileManager)
         {
-            _filePath = filePath;
+            _fileManager = fileManager;
             FileContent = string.Empty;
             DistinctWordCount = new Dictionary<string, int>();
         }
@@ -41,7 +41,7 @@
         /// </summary>
         public void Load()
         {
-            FileContent = File.ReadAllText(_filePath);
+            FileContent = _fileManager.Load();
             NonWhiteSpaceCharacterCount = FileContent.Count(c => !char.IsWhiteSpace(c));
 
             ComputeDistinctWords();
