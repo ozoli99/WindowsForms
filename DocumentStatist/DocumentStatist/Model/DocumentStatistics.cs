@@ -1,4 +1,6 @@
-﻿namespace DocumentStatist.Model
+﻿using DocumentStatist.Persistence;
+
+namespace DocumentStatist.Model
 {
     public class DocumentStatistics : IDocumentStatistics
     {

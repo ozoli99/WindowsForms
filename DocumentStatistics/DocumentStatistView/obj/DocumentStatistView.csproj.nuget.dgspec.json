@@ -48,6 +48,12 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "itext7": {
+              "target": "Package",
+              "version": "[7.2.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -111,6 +117,16 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "iTextSharp": {
+              "target": "Package",
+              "version": "[5.5.13.3, )"
+            },
+            "itext7": {
+              "target": "Package",
+              "version": "[7.2.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
