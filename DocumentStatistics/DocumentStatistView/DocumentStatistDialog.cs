@@ -1,5 +1,5 @@
 using DocumentStatist.Model;
-using static System.Windows.Forms.AxHost;
+using DocumentStatist.Persistence;
 
 namespace DocumentStatistView
 {
@@ -7,7 +7,7 @@ namespace DocumentStatistView
     {
         #region Private fields
 
-        DocumentStatistics? _documentStatistics;
+        private IDocumentStatistics? _documentStatistics;
 
         #endregion
 
@@ -18,7 +18,7 @@ namespace DocumentStatistView
             InitializeComponent();
 
             openFileDialogMenuItem.Click += OpenDialog;
-            countWordsMenuItem.Click += CountWords;
+            countWordsMenuItem.Click += CalculateStatistics;
         }
 
         #endregion
@@ -35,21 +35,30 @@ namespace DocumentStatistView
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    try
+                    IFileManager? fileManager = FileManagerFactory.CreateForPath(openFileDialog.FileName);
+
+                    if (fileManager == null)
                     {
-                        _documentStatistics = new DocumentStatistics(openFileDialog.FileName);
-                        _documentStatistics.Load();
-                    }
-                    catch (System.IO.IOException ex)
-                    {
-                        MessageBox.Show("File reading is unsuccessful!\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("File reading is unsuccessful!\nUnsupported file format.",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
-                    if (!String.IsNullOrEmpty(_documentStatistics.FileContent) && _documentStatistics.FileContent == textBox.Text)
+                    try
                     {
+                        _documentStatistics = new DocumentStatistics(fileManager);
+                        _documentStatistics.Load();
+                    }
+                    catch (FileManagerException ex)
+                    {
+                        MessageBox.Show("File reading is unsuccessful!\n" + ex.Message,
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
+
+                    if (!String.IsNullOrEmpty(_documentStatistics.FileContent)
+                        && _documentStatistics.FileContent == textBox.Text)
+                        return;
 
                     listBoxCounter.Items.Clear();
                     textBox.Text = _documentStatistics.FileContent;
@@ -58,41 +67,34 @@ namespace DocumentStatistView
             }
         }
 
-        private void CountWords(object? sender, EventArgs e)
+        private void CalculateStatistics(object? sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(_documentStatistics.FileContent))
+            if (_documentStatistics == null || String.IsNullOrEmpty(_documentStatistics.FileContent))
             {
-                MessageBox.Show("There's no file content read.", "DocumentStatist", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No file is loaded!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             int minLength = Convert.ToInt32(spinBoxMinLength.Value);
-            int minOccurence = Convert.ToInt32(spinBoxMinOccurence.Value);
-            string ignoredWordsText = textBoxIgnoredWords.Text;
-            List<string> ignoredWords = new List<string>();
+            int minOccurrence = Convert.ToInt32(spinBoxMinOccurrence.Value);
 
-            ignoredWords = ignoredWordsText
-                .Split(',')
+            var ignoredWords = textBoxIgnoredWords.Text.Split(',')
                 .Select(w => w.Trim().ToLower())
-                .ToList();
-
-            _documentStatistics.Load();
+                .ToList() ?? new List<string>();
 
             var pairs = _documentStatistics.DistinctWordCount
-                .Where(p => p.Value >= minOccurence)
+                .Where(p => p.Value >= minOccurrence)
                 .Where(p => p.Key.Length >= minLength)
                 .Where(p => !ignoredWords.Contains(p.Key))
                 .OrderByDescending(p => p.Value);
 
-            listBoxCounter.Items.Clear();
+            listBoxCounter.Items.Clear(); // ujboli statisztika keszitesekor toroljuk a mar a listan szerepl elemeket
             listBoxCounter.BeginUpdate();
             foreach (var pair in pairs)
             {
                 listBoxCounter.Items.Add(pair.Key + ": " + pair.Value);
             }
             listBoxCounter.EndUpdate();
-
-            UpdateLabels();
         }
 
         #endregion
@@ -101,12 +103,12 @@ namespace DocumentStatistView
 
         private void UpdateLabels()
         {
-            labelCharacters.Text = "Character count: " + _documentStatistics.CharacterCount.ToString();
-            labelNonWhitespaceCharacters.Text = "Non-whitespace characters: " + _documentStatistics.NonWhiteSpaceCharacterCount.ToString();
-            labelSentences.Text = "Sentence count: " + _documentStatistics.SentenceCount.ToString();
-            labelProperNouns.Text = "Proper noun count: " + _documentStatistics.ProperNounCount.ToString();
-            labelColemanLieuIndex.Text = $"Coleman Lieu Index: {_documentStatistics.ColemanLieuIndex:f2}";
-            labelFleschReadingEase.Text = $"Flesch Reading Ease: {_documentStatistics.FleschReadingEase:f2}";
+            labelCharacters.Text = labelCharacters.Text.Split(':')[0] + ": " + _documentStatistics!.CharacterCount;
+            labelNonWhitespaceCharacters.Text = labelNonWhitespaceCharacters.Text.Split(':')[0] + ": " + _documentStatistics.NonWhiteSpaceCharacterCount;
+            labelSentences.Text = labelSentences.Text.Split(':')[0] + ": " + _documentStatistics.SentenceCount;
+            labelProperNouns.Text = labelProperNouns.Text.Split(':')[0] + ": " + _documentStatistics.ProperNounCount;
+            labelColemanLieuIndex.Text = labelColemanLieuIndex.Text.Split(':')[0] + ": " + Math.Round(_documentStatistics.ColemanLieuIndex, 2);
+            labelFleschReadingEase.Text = labelFleschReadingEase.Text.Split(':')[0] + ": " + Math.Round(_documentStatistics.FleschReadingEase, 2);
         }
 
         #endregion
